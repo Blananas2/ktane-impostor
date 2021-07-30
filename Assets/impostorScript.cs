@@ -27,23 +27,25 @@ public class impostorScript : MonoBehaviour {
 
     void Awake () {
         moduleId = moduleIdCounter++;
+        GetMod();
+        GetScript();
+        GetSelectables();
+        Module.OnActivate += delegate () { chosenScript.OnActivate(); };
     }
 
     // Use this for initialization
     private void Start () 
     {
-        GetMod();
-        GetScript();
-        GetSelectables();
+        StartCoroutine(Hehe());
     }
     private void GetMod()
     {
         BG.SetActive(false);
         chosenMod = UnityEngine.Random.Range(0, Prefabs.Length);
-        //chosenMod = 4;
+        //chosenMod = 2;
         ChosenPrefab = Instantiate(Prefabs[chosenMod], Vector3.zero, Quaternion.identity, this.transform);
         ChosenPrefab.transform.localPosition = Vector3.zero;
-        Debug.LogFormat("[The Impostor #{0}] I may look like {1}, but do not be fooled...", moduleId, ChosenPrefab.name);
+        Debug.LogFormat("[The Impostor #{0}] I may look like {1}, but do not be fooled...", moduleId, Prefabs[chosenMod].name);
 
     }
     private void GetScript()
@@ -73,5 +75,9 @@ public class impostorScript : MonoBehaviour {
         for (int i = 0; i < chosenScript.buttons.Length; i++)
             chosenScript.buttons[i] = null;
     }
-    
+    IEnumerator Hehe()
+    {
+        yield return new WaitForSeconds(UnityEngine.Random.Range(15f, 30f));
+        Audio.PlaySoundAtTransform("hello", transform);
+    }
 }

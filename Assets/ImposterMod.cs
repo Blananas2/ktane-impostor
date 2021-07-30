@@ -44,6 +44,8 @@ public class ImposterMod : MonoBehaviour
     {
         Debug.LogFormat("[The Impostor #{0}] {1}", moduleId, msg);
     }
+    public virtual void OnActivate()
+    { }
 
     IEnumerator HoldBtn(KMSelectable btn)
     {

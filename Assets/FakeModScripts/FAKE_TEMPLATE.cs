@@ -7,8 +7,8 @@ using Rnd = UnityEngine.Random;
 
 public class TemplateFakeScript : ImposterMod 
 {
-    [SerializeField]
-    private GameObject[] objects; //SerializeField causes the variable to show up in the inspector, while keeping it a private variable.
+    [SerializeField]  //SerializeField causes the variable to show up in the inspector, while keeping it a private variable.
+    private GameObject[] objects; //This is just an example of SerializeField, replace these with whatever you want to interact with.
     public override SLPositions SLPos  //Can be ignored if SL Position is TR
     { get { return SLPositions.TR; } } 
     private int Case;
@@ -26,5 +26,9 @@ public class TemplateFakeScript : ImposterMod
                 break;
         }
         Log(string.Format("Test message 2+2={0}", 2+2));
+    }
+    public override void OnActivate()
+    {
+        //Gets called when the lights turn on.
     }
 }
